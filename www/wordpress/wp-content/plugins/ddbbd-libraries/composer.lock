@@ -1,0 +1,50 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "0cec52377e2d2154c370bca4860c87c5",
+    "packages": [
+        {
+            "name": "ddbbd/FileLoader",
+            "version": "0.1.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mimosafa/FileLoader.git",
+                "reference": "7a89f849b9d8f7092f2c554b2c59682d26237d60"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mimosafa/FileLoader/zipball/7a89f849b9d8f7092f2c554b2c59682d26237d60",
+                "reference": "7a89f849b9d8f7092f2c554b2c59682d26237d60",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DDBBD\\": ""
+                }
+            },
+            "license": [
+                "GPL2"
+            ],
+            "description": "Auto file loader for PHP development",
+            "support": {
+                "source": "https://github.com/mimosafa/FileLoader/tree/0.1.2.1"
+            },
+            "time": "2015-09-04 04:36:58"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

@@ -1,0 +1,12 @@
+{
+	"name": "ddbbd/ddbbd-libraries",
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "git@github.com:mimosafa/FileLoader.git"
+		}
+	],
+	"require": {
+		"ddbbd/FileLoader": "0.1.2.*"
+	}
+}
