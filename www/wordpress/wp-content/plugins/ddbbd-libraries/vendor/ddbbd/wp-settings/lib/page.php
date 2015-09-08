@@ -81,18 +81,16 @@ class Page {
 	 *
 	 * @access public
 	 *
-	 * @param  string $page       Optional
+	 * @param  string $page
 	 * @param  string $page_title Optional
 	 * @param  string $menu_title Optional
 	 * @return DDBBD\Settings\Page
 	 */
-	public function init( $page = null, $page_title = null, $menu_title = null ) {
+	public function init( $page, $page_title = null, $menu_title = null ) {
 		$this->_init_page();
 		$cache =& $this->getCache( 'page' );
-		if ( ! $page = filter_var( $page ) ) {
-			if ( ! $this->toplevel )
-				$page = 'options-general.php';
-		}
+		if ( ! $this->toplevel && ! $page = filter_var( $page ) )
+			$page = 'options-general.php';
 		if ( $page ) {
 			$cache = [ 'page' => $page ];
 			if ( ! $this->toplevel )
@@ -410,7 +408,7 @@ class Page {
 	 * @return (void)
 	 */
 	public function done() {
-		$this->init();
+		$this->_init_page();
 		if ( $this->pages ) {
 			add_action( 'admin_menu', [ &$this, '_add_pages' ] );
 			add_action( 'admin_init', [ &$this, '_add_settings' ] );
@@ -753,7 +751,7 @@ class Page {
 			return;
 		$option = esc_attr( $args['option'] );
 ?>
-<input type="text" name="<?php echo $option; ?>" id="<?php echo $option; ?>" value="" class="regular-text" />
+<input type="text" name="<?php echo $option; ?>" id="<?php echo $option; ?>" value="<?php form_option( $option ); ?>" class="regular-text" />
 <?php
 		if ( isset( $args['description'] ) )
 			echo $args['description'];
