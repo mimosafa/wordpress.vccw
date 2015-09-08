@@ -1,0 +1,20 @@
+{
+    "name": "ddbbd/wp-settings",
+    "description": "WordPress Settings API Interface Class",
+    "type": "library",
+    "license": "GPL2",
+    "require": {
+        "php": ">=5.4"
+    },
+    "author": [
+        {
+            "name": "Toshimichi Mimoto",
+            "email": "mimosafa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DDBBD\\Settings\\": "lib"
+        }
+    }
+}
