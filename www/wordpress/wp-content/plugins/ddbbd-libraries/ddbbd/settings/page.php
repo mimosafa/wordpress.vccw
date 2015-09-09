@@ -1,5 +1,5 @@
 <?php
-namespace DDBBD\Settings;
+namespace DDBBD\WP\Settings;
 
 /**
  * WordPress Settings API interface class
