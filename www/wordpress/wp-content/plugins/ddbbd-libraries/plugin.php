@@ -32,3 +32,7 @@ $page2->done();
 
 Types\Register::post_type( 'test', [ 'public' => true ] );
 Types\Register::taxonomy( 'test_tax', 'test', [ 'public' => true ] );
+
+$a = new Types\Builder( 'test-' );
+$a->post_type( 'bbb' )->post_type( 'ccc' )->taxonomy( 'ttt' )->post_type( 'ddd' )->post_type( 'aaa' )->post_type( 'zzz' );
+#var_dump( $a );
