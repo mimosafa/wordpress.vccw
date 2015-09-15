@@ -18,7 +18,7 @@ class Definition {
 	public static function instance( $prefix = null, $defaults = null ) {
 		if ( did_action( 'init' ) )
 			throw new \Exception( 'Too Late' );
-		if ( ! isset( $prefix ) || $prefix = '' )
+		if ( ! isset( $prefix ) || $prefix === '' )
 			return self::getInstance( '', $defaults );
 		if ( ! is_string( $prefix ) || $prefix !== sanitize_key( $prefix ) || strlen( $prefix ) > 16 )
 			throw new \Exception( 'Invalid' );
@@ -52,6 +52,7 @@ class Definition {
 			$this->set_defaults( $defaults );
 		if ( ! $added_action ) {
 			add_action( 'init', [ &$this, 'register' ], 1 );
+			$added_action = true;
 		}
 	}
 
