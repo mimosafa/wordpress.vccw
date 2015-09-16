@@ -3,6 +3,8 @@ namespace mimosafa\WP\Repository;
 
 abstract class Regulation {
 
+	protected static $reserved;
+
 	/**
 	 * @access protected
 	 *

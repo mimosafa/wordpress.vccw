@@ -30,9 +30,13 @@ class Definition {
 	}
 
 	public function post_type( $name, $args ) {
+		if ( ! is_string( $name )
+			|| ! filter_var( $this->prefix . $name, \FILTER_CALLBACK, [ 'options' => __NAMESPACE__ . '\\PostType\\Regulation::validate_name' ] )
+		)
+			throw new \Exception( 'Invalid Post Type Name' );
 		if ( $args && is_array( $args ) )
 			array_walk( $args, __NAMESPACE__ . '\\PostType\\Regulation::arguments_walker' );
-		#var_dump( $args );
+		var_dump( $args );
 	}
 
 	public function taxonomy( $name, $args ) {}

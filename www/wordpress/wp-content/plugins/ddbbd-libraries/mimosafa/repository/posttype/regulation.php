@@ -1,8 +1,6 @@
 <?php
 namespace mimosafa\WP\Repository\PostType;
 
-require_once dirname( __DIR__ ) . '/regulation.php';
-
 use \mimosafa\WP\Misc as WP;
 use \mimosafa\WP\Repository as Repo;
 
@@ -13,6 +11,12 @@ class Regulation extends Repo\Regulation {
 			$arg = self::$method( $arg );
 		else
 			$arg = null;
+	}
+
+	public static function validate_name( $var ) {
+		if ( ! self::sanitized_key( $var ) )
+			return false;
+		return true;
 	}
 
 	public static function label_filter( $var ) {
