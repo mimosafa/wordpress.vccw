@@ -6,6 +6,10 @@ use \mimosafa\WP\Repository as Repo;
 
 class Regulation extends Repo\Regulation {
 
+	public static $post_arguments = [
+		//
+	];
+
 	public static function arguments_walker( &$arg, $key ) {
 		if ( method_exists( __CLASS__, ( $method = $key . '_filter' ) ) )
 			$arg = self::$method( $arg );
@@ -18,6 +22,8 @@ class Regulation extends Repo\Regulation {
 			return false;
 		return true;
 	}
+
+	//
 
 	public static function label_filter( $var ) {
 		//
