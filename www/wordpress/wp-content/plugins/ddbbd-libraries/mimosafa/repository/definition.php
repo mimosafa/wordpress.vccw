@@ -30,13 +30,23 @@ class Definition {
 	}
 
 	public function post_type( $name, $args ) {
+		var_dump( $name );
 		if ( ! is_string( $name )
 			|| ! filter_var( $this->prefix . $name, \FILTER_CALLBACK, [ 'options' => __NAMESPACE__ . '\\PostType\\Regulation::validate_name' ] )
-		)
+		) {
 			throw new \Exception( 'Invalid Post Type Name' );
-		if ( $args && is_array( $args ) )
+		}
+		if ( $cache =& $this->getCache() ) {
+			$this->cleanCache();
+		}
+		$cache['post_type'] = $name;
+		if ( $args && is_array( $args ) ) {
 			array_walk( $args, __NAMESPACE__ . '\\PostType\\Regulation::arguments_walker' );
-		var_dump( $args );
+			foreach ( $args as $key => $val ) {
+				if ( isset( $val ) )
+					$cache[$key] = $val;
+			}
+		}
 	}
 
 	public function taxonomy( $name, $args ) {}
@@ -55,7 +65,7 @@ class Definition {
 		if ( $defaults )
 			$this->set_defaults( $defaults );
 		if ( ! $added_action ) {
-			add_action( 'init', [ &$this, 'register' ], 1 );
+			add_action( 'init', __CLASS__ . '\\register', 1 );
 			$added_action = true;
 		}
 	}
@@ -69,14 +79,32 @@ class Definition {
 		return self::$cache[$this->prefix] ?: $falseVal;
 	}
 
-	public function register() {
+	private function cleanCache() {
+		$cache =& $this->getCache();
+		if ( isset( $cache['post_type'] ) ) {
+			$name = $cache['post_type'];
+			unset( $cache['post_type'] );
+			self::$repositories[$name] = [ $this->prefix . $name, $cache ];
+		} else if ( isset( $cache['taxonomy'] ) ) {
+			$name = $cache['taxonomy'];
+			unset( $cache['taxonomy'] );
+			$object_type = $cache['object_type'];
+			unset( $cache['object_type'] );
+			self::$repositories[$name] = [ $this->prefix . $name, $object_type, $cache ];
+		}
+		$cache = [];
+	}
+
+	public static function register() {
 		if ( ! doing_action( 'init' ) || ! self::$repositories )
 			return;
 		foreach ( self::$repositories as $name => $args ) {
-			if ( isset( $args['post_type'] ) )
-				$this->register_post_type( $name, $args );
-			else if ( isset( $args['taxonomy'] ) )
-				$this->register_taxonomy( $name, $args );
+			//
+			if ( isset( $args['post_type'] ) ) {
+				# $this->register_post_type( $name, $args );
+			} else if ( isset( $args['taxonomy'] ) ) {
+				# $this->register_taxonomy( $name, $args );
+			}
 		}
 	}
 
